@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+    <path fill="#74D1EA">
+        <animate
+            attributeName="d"
+            values="M50,50 Q100,0 150,50 Q200,100 150,150 Q100,200 50,150 Q0,100 50,50Z;
+                M50,50 Q150,0 150,50 Q150,150 150,150 Q150,200 50,150 Q0,100 50,50Z;
+                M50,50 Q100,0 200,100 Q150,200 50,150 Q0,100 50,50Z"
+            dur="1s"
+            repeatCount="indefinite" 
+            fill="freeze"/>
+    </path>
+</svg>
+  
