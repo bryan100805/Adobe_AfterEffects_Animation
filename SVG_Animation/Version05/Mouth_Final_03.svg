@@ -10,7 +10,7 @@ viewBox="0 0 1920 1080">
         M305.23,540.23c15.9-8.39,304.71-158.04,672.77-158.04s614.64,137.87,674.46,156.92c-49.1,47.51-365.38,407.85-685.7,407.85-276.11,0-555.57-290.04-661.53-406.72Z;
         M287.93,539.57c18.83-3.61,304.2-137.02,672.26-137.02s643.95,120.46,706.47,134.94c-57.17,38.61-366.19,199.39-686.51,199.39-276.11,0-563.87-116.63-692.21-197.31Z;"
         dur="4s"
-        keyTimes="0;0.5;1"
+        keyTimes="0;0.25;1"
         keySplines="0.5 0 0.5 1; 0.5 0 0.5 1;"
         repeatCount="indefinite"
         fill="freeze"
@@ -49,6 +49,13 @@ viewBox="0 0 1920 1080">
         keyTimes="0;0.25;1"
         keySplines="0.5 0 0.5 1; 0.5 0 0.5 1;"
         repeatCount="indefinite"/>
+        <animate 
+        attributeName="opacity"
+        values="0; 0; 0;"
+        keyTimes="0;0.25;1"
+        keySplines="0.5 0 0.5 1; 0.5 0 0.5 1;"
+        repeatCount="indefinite"
+        />
     </path>
     <path id="Upper_Lips" data-name="Upper Lips" fill="#e18788">
         <animate 
