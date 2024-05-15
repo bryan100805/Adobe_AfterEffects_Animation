@@ -71,6 +71,6 @@ document.addEventListener("DOMContentLoaded", function () {
     link.textContent = `Download Frame ${index}`;
     link.style.display = "block"; // Make each link a new line
 
-    document.body.appendChild(link);
+    document.body.appendChild(link)
   });
 });
