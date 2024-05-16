@@ -1,6 +1,12 @@
 document.getElementById("generateAnimatedSVGs").addEventListener("click", function () {
     const startFile = document.getElementById("startSvg").files[0];
     const endFile = document.getElementById("endSvg").files[0];
+    const numframes = parseInt(document.getElementById("numFrames").value, 10);
+    const duration = document.getElementById("duration").value;
+    const cp1x = parseFloat(document.getElementById("cp1x").value);
+    const cp1y = parseFloat(document.getElementById("cp1y").value);
+    const cp2x = parseFloat(document.getElementById("cp2x").value);
+    const cp2y = parseFloat(document.getElementById("cp2y").value);
 
     if (!startFile || !endFile) {
       alert("Please upload both start and end SVG files.");
@@ -28,7 +34,7 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
 
         // Initialize pathFrames to hold all frames for all paths
         const pathFrames = Array.from({ length: startPaths.length }, () => []);
-        const numFrames = 20;
+        const numFrames = numframes-1;
 
         // Append paths with animate tags to SVG without initial 'd' attributes
         startPaths.forEach((path, index) => {
@@ -59,7 +65,7 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
             { length: numFrames + 1 },
             (_, frameIndex) => {
               const t = frameIndex / numFrames;
-              const { y } = cubicBezier(t, [0.42, 0], [0.58, 1]);
+              const { y } = cubicBezier(t, [cp1x, cp1y], [cp2x, cp2y]);
               const interpolator = d3.interpolate(
                 startPaths[index].getAttribute("d"),
                 endPaths[index].getAttribute("d")
@@ -68,7 +74,7 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
             }
           );
 
-          animateElement.setAttribute("dur", "4s");
+          animateElement.setAttribute("dur", duration + "s");
           animateElement.setAttribute("values", pathFrames[index].join(";"));
           animateElement.setAttribute("keyTimes", keyTimes);
 
