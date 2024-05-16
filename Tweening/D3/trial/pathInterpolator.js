@@ -10,7 +10,10 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
     Promise.all([startFile.text(), endFile.text()]).then(
       ([startSvgData, endSvgData]) => {
         const parser = new DOMParser();
-        const startSvgDoc = parser.parseFromString(startSvgData, "image/svg+xml");
+        const startSvgDoc = parser.parseFromString(
+          startSvgData,
+          "image/svg+xml"
+        );
         const endSvgDoc = parser.parseFromString(endSvgData, "image/svg+xml");
 
         const startPaths = [...startSvgDoc.querySelectorAll("path")];
@@ -23,30 +26,40 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
           return;
         }
 
+        // Initialize pathFrames to hold all frames for all paths
+        const pathFrames = Array.from({ length: startPaths.length }, () => []);
+        const numFrames = 20;
+
         // Append paths with animate tags to SVG without initial 'd' attributes
         startPaths.forEach((path, index) => {
+
           // Create a new path element for each frame
-          const newPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
+          const newPath = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+          );
 
           //Assuming that both svgs have the same fill color
           const startFill = path.getAttribute("fill");
           newPath.setAttribute("fill", startFill);
 
-          const animateElement = document.createElementNS("http://www.w3.org/2000/svg", "animate");
-          // 
+          const animateElement = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "animate"
+          );
+
           animateElement.setAttribute("attributeName", "d");
           animateElement.setAttribute("repeatCount", "indefinite");
 
-          const numFrames = 20;
           const keyTimes = Array.from({ length: numFrames + 1 }, (_, i) =>
             (i / numFrames).toFixed(2)
           ).join(";");
 
-          const pathFrames = Array.from(
+          pathFrames[index] = Array.from(
             { length: numFrames + 1 },
             (_, frameIndex) => {
               const t = frameIndex / numFrames;
-              const { y } = cubicBezier(t, [0.25, 1], [0.25, 1]);
+              const { y } = cubicBezier(t, [0.42, 0], [0.58, 1]);
               const interpolator = d3.interpolate(
                 startPaths[index].getAttribute("d"),
                 endPaths[index].getAttribute("d")
@@ -56,17 +69,19 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
           );
 
           animateElement.setAttribute("dur", "4s");
-          animateElement.setAttribute("values", pathFrames.join(";"));
+          animateElement.setAttribute("values", pathFrames[index].join(";"));
           animateElement.setAttribute("keyTimes", keyTimes);
 
           newPath.appendChild(animateElement);
           animationSVG.appendChild(newPath);
         });
+
+        downloadFrames(pathFrames, numFrames, startPaths); 
       }
     );
   });
 
-// Cubic Bezier function for easing in easing out animation
+// Cubic Bezier function for animation
 function cubicBezier(t, p1, p2) {
   const cp1x = p1[0],
     cp1y = p1[1],
