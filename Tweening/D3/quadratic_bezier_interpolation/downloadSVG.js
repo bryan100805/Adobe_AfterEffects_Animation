@@ -1,4 +1,7 @@
 function downloadFrames(pathFrames, numFrames, startPaths) {
+    const downloadLinksContainer = document.getElementById('downloadLinks');
+    downloadLinksContainer.innerHTML = '';
+
     for (let frameIndex = 0; frameIndex <= numFrames; frameIndex++) {
         const frameSvg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         frameSvg.setAttribute("viewBox", "0 0 1920 1080");
@@ -19,7 +22,8 @@ function downloadFrames(pathFrames, numFrames, startPaths) {
         link.href = url;
         link.download = `frame_${frameIndex+1}.svg`;
         link.textContent = `Download Frame ${frameIndex+1}`;
-        link.style.display = "block";
-        document.body.appendChild(link);
+        link.className = "download-link";
+        link.style.display = "inline-block";
+        downloadLinksContainer.appendChild(link); 
     }
 }

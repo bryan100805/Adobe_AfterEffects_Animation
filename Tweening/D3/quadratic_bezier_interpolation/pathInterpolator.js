@@ -1,4 +1,8 @@
 document.getElementById("generateAnimatedSVGs").addEventListener("click", function () {
+    // Clear previous download links if any exist
+    const existingLinks = document.querySelectorAll(".download-link");
+    existingLinks.forEach((link) => link.remove());
+
     const startFile = document.getElementById("startSvg").files[0];
     const endFile = document.getElementById("endSvg").files[0];
     const numframes = parseInt(document.getElementById("numFrames").value, 10);
@@ -34,11 +38,10 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
 
         // Initialize pathFrames to hold all frames for all paths
         const pathFrames = Array.from({ length: startPaths.length }, () => []);
-        const numFrames = numframes-1;
+        const numFrames = numframes - 1;
 
         // Append paths with animate tags to SVG without initial 'd' attributes
         startPaths.forEach((path, index) => {
-
           // Create a new path element for each frame
           const newPath = document.createElementNS(
             "http://www.w3.org/2000/svg",
@@ -82,7 +85,7 @@ document.getElementById("generateAnimatedSVGs").addEventListener("click", functi
           animationSVG.appendChild(newPath);
         });
 
-        downloadFrames(pathFrames, numFrames, startPaths); 
+        downloadFrames(pathFrames, numFrames, startPaths);
       }
     );
   });
