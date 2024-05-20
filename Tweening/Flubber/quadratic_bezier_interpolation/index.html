@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Path Interpolation with D3.js</title>
+    <script src="https://unpkg.com/flubber"></script>
+    <link rel="stylesheet" href="index.css"></link>
+</head>
+<body>
+    <div id="inputsContainer">
+        <div class="input-group">
+            <label for="startSvg">Starting SVG:</label>
+            <input type="file" id="startSvg" accept=".svg">
+        </div>
+        <div class="input-group">
+            <label for="endSvg">Ending SVG:</label>
+            <input type="file" id="endSvg" accept=".svg">
+        </div>
+        <div class="input-group">
+            <label for="numFrames">Number of Frames:</label>
+            <input type="number" id="numFrames" value="20">
+        </div>
+        <div class="input-group">
+            <label for="duration">Duration (seconds):</label>
+            <input type="number" id="duration" value="4">
+        </div>
+        <div class="input-group">
+            <label for="cp1x">Control Point 1 (X):</label>
+            <input type="text" id="cp1x" value="0.25">
+        </div>
+        <div class="input-group">
+            <label for="cp1y">Control Point 1 (Y):</label>
+            <input type="text" id="cp1y" value="1">
+        </div>
+        <div class="input-group">
+            <label for="cp2x">Control Point 2 (X):</label>
+            <input type="text" id="cp2x" value="0.25">
+        </div>
+        <div class="input-group">
+            <label for="cp2y">Control Point 2 (Y):</label>
+            <input type="text" id="cp2y" value="1">
+        </div>
+        <button id="generateAnimatedSVGs">Generate</button>
+    </div>
+    <svg id="animationSVG" viewBox="0 0 1920 1080"></svg>
+    <div id="downloadLinks"></div>
+    
+    <script src="pathInterpolator.js"></script>
+    <script src="downloadSVG.js"></script>
+</body>
+</html>
